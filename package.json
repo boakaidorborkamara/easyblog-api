@@ -1,0 +1,24 @@
+{
+  "name": "easyblog-api",
+  "version": "1.0.0",
+  "description": "An easy blogging platform",
+  "homepage": "https://github.com/boakaidorborkamara/easyblog-api#readme",
+  "bugs": {
+    "url": "https://github.com/boakaidorborkamara/easyblog-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boakaidorborkamara/easyblog-api.git"
+  },
+  "license": "ISC",
+  "author": "Boakai Dorbor Kamara",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
