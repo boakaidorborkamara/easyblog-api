@@ -1,18 +1,29 @@
 const Category = require("../models/categoryModel");
+const {success} = require("../utils/response");
 
-const getCategory = (req, res, next)=>{
-    res.send("getting Category...");
-}
 
 const createCategory = async (req, res, next)=>{
     try{
-        throw new Error("test")
-        res.send("creating Category...")
+        // extract details form request body 
+        let {title} = req.body;
+
+        // create a new category and save it to db 
+        let category = Category({title});
+        let result = await category.save();
+
+        // send response 
+        res.status(201).json(success(result, "Category created successfully!"));
     }
     catch(err){
         next(err)
     }
 }
+
+
+const getCategory = (req, res, next)=>{
+    res.send("getting Category...");
+}
+
 
 const updateCategory = (req, res, next)=>{
     res.send("updating Category...")

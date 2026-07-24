@@ -9,7 +9,7 @@ const generateAccessToken = (user)=>{
 }
 
 const generateRefreshToken = (user)=>{
-    let token = jwt.sign({ user: user.id }, JWT_SECRET, {expiresIn:"3d"});
+    let token = jwt.sign({ user: user.id }, JWT_SECRET, {expiresIn:"30d"});
     return token;
 }
 

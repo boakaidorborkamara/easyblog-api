@@ -5,10 +5,10 @@ function errorHandler(err, req, res, next){
     logger.error("error", err);
 
     if(err.name === "ValidationError"){
-        res.status(400).json(failure(400, err, err.message));
+        return res.status(400).json(failure(400, err, err.message));
     }
 
-    res.status(500).json({msg:"Server encounter an error"});
+    return res.status(500).json({msg:"Server encounter an error"});
 }
 
 

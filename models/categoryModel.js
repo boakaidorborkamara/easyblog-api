@@ -5,10 +5,21 @@ const categorySchema = new Schema(
     {
         title:{
             type:String,
+            required:true,
             minLength:2,
-            require:true
+            
         },
 
+    },
+    {
+        toJSON:{
+            transform:(doc, return_doc)=>{
+                return_doc.id = doc._id;
+
+                delete return_doc._id;
+                delete return_doc.__v;
+            }
+        }
     }
 );
 
