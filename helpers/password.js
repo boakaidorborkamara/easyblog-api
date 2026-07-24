@@ -15,7 +15,7 @@ const hashPassword = async (myPlaintextPassword)=>{
 
 const verifyPassword = async (myPlaintextPassword, hashPassword)=>{
     try{
-        const isMatch = await bcrypt.compare(password, hashPassword);
+        const isMatch = await bcrypt.compare(myPlaintextPassword, hashPassword);
         return isMatch;
     }
     catch(err){

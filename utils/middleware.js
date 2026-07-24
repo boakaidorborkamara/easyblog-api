@@ -1,8 +1,11 @@
+const {success, failure} = require("../utils/response");
+const logger = require("../utils/logger");
+
 function errorHandler(err, req, res, next){
-    console.log("err", err)
+    logger.error("error", err);
 
     if(err.name === "ValidationError"){
-        res.status(400).json({status:"fail", message:err.message, data:null});
+        res.status(400).json(failure(400, err, err.message));
     }
 
     res.status(500).json({msg:"Server encounter an error"});
@@ -10,7 +13,7 @@ function errorHandler(err, req, res, next){
 
 
 function notFound(req, res){
-    res.status(404).json({msg:"Route doesn't exist."});
+    res.status(404).json(failure(404, null, "Route doesn't exist."));
 }
 
 
