@@ -24,6 +24,18 @@ const userSchema = new Schema(
             required:true
         }
 
+    },
+    {
+        toJSON:{
+            transform:(doc, return_doc)=>{
+                return_doc.id = return_doc._id
+
+                delete return_doc._id;
+                delete return_doc.password;
+                delete return_doc.__v;
+                
+            }
+        }
     }
 );
 

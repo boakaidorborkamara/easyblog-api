@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const {success, failure} = require("../utils/response");
 const {hashPassword} = require("../helpers/password");
 
 const signup = async(req, res, next)=>{
@@ -12,8 +13,9 @@ const signup = async(req, res, next)=>{
 
         // save user to db 
         let result = await user.save();
-
-        res.status(201).json({status:"successful", message:"Account created successfully!", data:result});
+       
+        // send response 
+        res.status(201).json(success(result, "Account created successfully!" ));
 
    }
    catch(err){
