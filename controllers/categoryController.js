@@ -4,8 +4,14 @@ const getCategory = (req, res, next)=>{
     res.send("getting Category...");
 }
 
-const createCategory = (req, res, next)=>{
-    res.send("creating Category...")
+const createCategory = async (req, res, next)=>{
+    try{
+        throw new Error("test")
+        res.send("creating Category...")
+    }
+    catch(err){
+        next(err)
+    }
 }
 
 const updateCategory = (req, res, next)=>{

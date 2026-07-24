@@ -9,6 +9,7 @@ const DB_CONFIG = async()=>{
     try {
         await mongoose.connect(MONGO_URL);
         logger.info("Database connected successfully!");
+        
     } catch (error) {
         throw error
     }
