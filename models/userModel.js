@@ -6,8 +6,23 @@ const userSchema = new Schema(
         first_name:{
             type:String,
             minLength:2,
-            require:true
+            required:true
         },
+        last_name:{
+            type:String,
+            minLength:2,
+            required:true
+        },
+         username:{
+            type:String,
+            minLength:2,
+            required:true
+        },
+        password:{
+            type:String,
+            minLength:5,
+            required:true
+        }
 
     }
 );
