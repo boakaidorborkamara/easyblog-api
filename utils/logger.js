@@ -1,6 +1,6 @@
 // log info 
 function info(...params){
-    console.log(...params);
+    console.log([...params]);
 }
 
 // log errors 
