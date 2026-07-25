@@ -1,11 +1,23 @@
 const Post = require("../models/postModel");
+const {success} = require("../utils/response");
 
 const getPost = (req, res, next)=>{
     res.send("getting Post...");
 }
 
-const createPost = (req, res, next)=>{
-    res.send("creating Post...")
+const createPost = async (req, res, next)=>{
+    try{
+        let {title, body} = req.body;
+
+        let post = Post({title, body});
+
+        let result = await post.save();
+
+        res.status(201).json(success(result, "Post created successfully!"));
+    }
+    catch(err){
+        next(err);
+    }
 }
 
 const updatePost = (req, res, next)=>{
