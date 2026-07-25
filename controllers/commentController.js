@@ -1,3 +1,4 @@
+const { request } = require("express");
 const Comment = require("../models/commentModel");
 const {success} = require("../utils/response");
 
@@ -5,9 +6,10 @@ const createComment = async(req, res, next)=>{
     try{
         // extract detail from request body 
         let {body} = req.body;
+        let post_id = req.params.post_id;
 
         // create new comment  
-        let comment = Comment({body});
+        let comment = Comment({body, post:post_id});
 
         // add comment to db 
         let result = await comment.save();
