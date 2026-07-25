@@ -3,12 +3,21 @@ const {Schema, model} = require("mongoose");
 // comment schema 
 const commentSchema = new Schema(
     {
-        title:{
+        body:{
             type:String,
-            minLength:2,
-            require:true
+            required:true
         },
 
+    },
+    {
+        toJSON:{
+            transform:(doc, return_doc)=>{
+                return_doc.id = doc._id;
+
+                delete return_doc._id;
+                delete return_doc.__v;
+            }
+        }
     }
 );
 

@@ -20,7 +20,7 @@ const createCategory = async (req, res, next)=>{
 }
 
 
-const getCategory = (req, res, next)=>{
+const getAllCategory = (req, res, next)=>{
     res.send("getting Category...");
 }
 
@@ -35,7 +35,7 @@ const deleteCategory = (req, res, next)=>{
 
 
 module.exports = {
-    getCategory,
+    getAllCategory,
     createCategory,
     updateCategory,
     deleteCategory
