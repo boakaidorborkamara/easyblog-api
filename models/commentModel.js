@@ -9,7 +9,8 @@ const commentSchema = new Schema(
         },
         post:{
             type: mongoose.Schema.Types.ObjectId,
-            required: true
+            required: true,
+            ref:"Post"
         }
 
     },

@@ -1,8 +1,14 @@
 const Post = require("../models/postModel");
 const {success} = require("../utils/response");
 
-const getPost = (req, res, next)=>{
-    res.send("getting Post...");
+const getAllPost = async(req, res, next)=>{
+   try{
+        let posts = await Post.find().populate("comments");
+        res.status(200).json(success(posts, "Post fetched successfully?"));
+   }
+   catch(err){
+        next(err);
+   }
 }
 
 const createPost = async (req, res, next)=>{
@@ -30,7 +36,7 @@ const deletePost = (req, res, next)=>{
 
 
 module.exports = {
-    getPost,
+    getAllPost,
     createPost,
     updatePost,
     deletePost
