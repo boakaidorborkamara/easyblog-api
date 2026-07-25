@@ -1,4 +1,4 @@
-const {Schema, model} = require("mongoose");
+const {Schema, model, default: mongoose} = require("mongoose");
 
 // comment schema 
 const commentSchema = new Schema(
@@ -7,6 +7,10 @@ const commentSchema = new Schema(
             type:String,
             required:true
         },
+        post:{
+            type: mongoose.Schema.Types.ObjectId,
+            required: true
+        }
 
     },
     {
