@@ -3,7 +3,7 @@ const {success} = require("../utils/response");
 
 const getAllPost = async(req, res, next)=>{
    try{
-        let posts = await Post.find().populate("comments");
+        let posts = await Post.find({}).populate("comments",)
         res.status(200).json(success(posts, "Post fetched successfully?"));
    }
    catch(err){
