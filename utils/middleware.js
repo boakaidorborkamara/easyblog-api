@@ -17,7 +17,24 @@ function notFound(req, res){
 }
 
 
+function loggerMiddlware(req, res, next){
+    logger.info("Route", req.path);
+    logger.info("Method", req.method);
+    logger.info("Body", req.body);
+
+    next();
+}
+
+function auth(req, res, next){
+    let authHeader = req.headers.authorization;
+    console.log("auth header", authHeader);
+    next();
+}
+
+
 module.exports = {
     errorHandler,
-    notFound
+    notFound,
+    loggerMiddlware,
+    auth
 }
