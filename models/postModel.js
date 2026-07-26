@@ -12,6 +12,11 @@ const postSchema = new Schema(
             type:String,
             required:true
         },
+        category:{
+            type:mongoose.Schema.Types.ObjectId,
+            required:true,
+            ref:"Category"
+        },
         comments:{
             type: [mongoose.Schema.Types.ObjectId],
             ref:"Comment"

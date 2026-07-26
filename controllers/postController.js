@@ -13,9 +13,10 @@ const getAllPost = async(req, res, next)=>{
 
 const createPost = async (req, res, next)=>{
     try{
-        let {title, body} = req.body;
+        let {title, category, body} = req.body;
 
-        let post = Post({title, body});
+        let post = Post({title, category, body});
+        post.populate("category")
 
         let result = await post.save();
 
