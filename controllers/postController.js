@@ -13,13 +13,19 @@ const getAllPost = async(req, res, next)=>{
 
 const createPost = async (req, res, next)=>{
     try{
+        let user = req.user.id;
+
+        // extract data from request body 
         let {title, category, body} = req.body;
 
-        let post = Post({title, category, body});
+        // create a new post 
+        let post = Post({title, category, user, body});
         post.populate("category")
 
+        // add post to database 
         let result = await post.save();
 
+        // send response 
         res.status(201).json(success(result, "Post created successfully!"));
     }
     catch(err){

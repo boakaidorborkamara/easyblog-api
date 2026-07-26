@@ -13,12 +13,20 @@ const generateRefreshToken = (user)=>{
     return token;
 }
 
-const decodeToken = (user)=>{
-    let token = jwt.sign({ user: user.id }, JWT_SECRET, {expiresIn:"3d"});
+const decodeToken = async(jwt_token)=>{
+   try{
+        
+        let decoded = await jwt.verify(jwt_token, JWT_SECRET);
+        return decoded;
+   }
+   catch(err){
+    throw err
+   }
 }
 
 
 module.exports = {
     generateAccessToken,
-    generateRefreshToken
+    generateRefreshToken,
+    decodeToken
 }

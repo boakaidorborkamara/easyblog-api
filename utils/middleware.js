@@ -1,5 +1,6 @@
 const {success, failure} = require("../utils/response");
 const logger = require("../utils/logger");
+const {decodeToken} = require("./token");
 
 function errorHandler(err, req, res, next){
     logger.error("error", err);
@@ -25,10 +26,33 @@ function loggerMiddlware(req, res, next){
     next();
 }
 
-function auth(req, res, next){
-    let authHeader = req.headers.authorization;
-    console.log("auth header", authHeader);
-    next();
+async function auth(req, res, next){
+    try{
+        console.log("authentication middleware running....")
+        let authHeader = req.headers.authorization;
+
+        // check if authorization header was provided 
+        if(!authHeader){
+            return res.status(403).json(failure(403, "The request is missing authorization header.", "Authorization header missing."))
+        }
+        else if(authHeader.split(" ")[0] !== "Bearer"){
+            console.log("bearer missing...")
+            return res.status(403).json(failure(403, "The request is missing bearer token.", "Bearer token missing."))
+        }
+
+        // extract bearer token from authorization header 
+        let token = authHeader.split(" ")[1];
+
+        // decode token
+        let decoded = await decodeToken(token);
+
+        req.user = {id:decoded.user}
+
+        next();
+    }
+    catch(err){
+        next(err)
+    }
 }
 
 
