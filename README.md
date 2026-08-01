@@ -1,2 +1,2 @@
 # easyblog-api
-## This is an API for a blog platform for anyone looking for and easy way to blog.
+## a RESTful API for a personal blog that allows creating, reading, updating, and deleting blog posts.
