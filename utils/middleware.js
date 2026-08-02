@@ -42,6 +42,10 @@ async function auth(req, res, next){
 
         // extract bearer token from authorization header 
         let token = authHeader.split(" ")[1];
+        if(!token){
+            console.log("token is missing")
+            return res.status(400).json(failure(403, "Token required!", "Missing bearer token"))
+        }
 
         // decode token
         let decoded = await decodeToken(token);

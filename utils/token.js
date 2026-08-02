@@ -15,8 +15,9 @@ const generateRefreshToken = (user)=>{
 
 const decodeToken = async(jwt_token)=>{
    try{
-        
+        console.log("decoding token");
         let decoded = await jwt.verify(jwt_token, JWT_SECRET);
+        console.log("token decoded:", decoded);
         return decoded;
    }
    catch(err){

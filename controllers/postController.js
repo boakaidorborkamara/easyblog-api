@@ -1,5 +1,5 @@
 const Post = require("../models/postModel");
-const {success} = require("../utils/response");
+const {success, failure} = require("../utils/response");
 
 const createPost = async (req, res, next)=>{
     try{
@@ -56,8 +56,26 @@ const getAllPost = async(req, res, next)=>{
    }
 }
 
-const updatePost = (req, res, next)=>{
-    res.send("updating Post...")
+const updatePost = async(req, res, next)=>{
+   try{
+        let post_id = req.params.id;
+        
+        let updates = req.body;
+
+        let post = await Post.findByIdAndUpdate(post_id, {$set:updates},{new:true, reValidation:true} );
+
+        // handle post not found 
+        if(!post){
+             res.status(404).json(failure(404, null, "Post with the provided ID doesn't exist!"));
+        }
+        
+        
+        // send response 
+        res.status(404).json(success(post,"Post successfully updated!"));
+   }
+   catch(err){
+        throw err;
+   }
 }
 
 const deletePost = (req, res, next)=>{
