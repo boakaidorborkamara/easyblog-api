@@ -84,15 +84,31 @@ const updatePost = async(req, res, next)=>{
         
         
         // send response 
-        res.status(404).json(success(post,"Post successfully updated!"));
+        res.status(200).json(success(post,"Post successfully updated!"));
    }
    catch(err){
         throw err;
    }
 }
 
-const deletePost = (req, res, next)=>{
-    res.send("deleting Post...")
+const deletePost = async(req, res, next)=>{
+    try{
+        // get user data 
+        let id = req.params.id;
+        console.log(id);
+
+        
+        let deleted_post = await Post.findByIdAndDelete(id);
+
+        if(!deleted_post){
+            res.status(404).json(failure(404, "Post Not found", "Post with the provided id not found!"))
+        }
+
+        res.status(200).json(success(null, "Post successfully deleted!"))
+    }
+    catch(err){
+        next(err);
+    }
 }
 
 
