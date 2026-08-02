@@ -58,11 +58,24 @@ const getAllPost = async(req, res, next)=>{
 
 const updatePost = async(req, res, next)=>{
    try{
+        // define allowed fields for edit 
+        let allowedFields = ["title", "body"];
+
+        // get user data 
         let post_id = req.params.id;
-        
         let updates = req.body;
 
-        let post = await Post.findByIdAndUpdate(post_id, {$set:updates},{new:true, reValidation:true} );
+        // restructure query based on user data and allowedFields, update allow fields only  
+        let query = {};
+        Object.keys(updates).forEach(field =>{
+            if(allowedFields.includes(field)){
+                // console.log("field:" , field)
+                query[field] = updates[field];
+            }
+        })
+
+        // update db 
+        let post = await Post.findByIdAndUpdate(post_id, {$set:query},{returnDocument:"after", reValidation:true} );
 
         // handle post not found 
         if(!post){
