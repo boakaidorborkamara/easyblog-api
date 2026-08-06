@@ -5,6 +5,10 @@ const {success, failure} = require("../utils/response");
 
 const createComment = async(req, res, next)=>{
     try{
+        let user_id = req.user.id;
+        console.log("user id", user_id);
+
+
         // extract detail from request body 
         let {body} = req.body; //comment body
         let post_id = req.params.post_id; //post id
