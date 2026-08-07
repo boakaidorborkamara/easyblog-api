@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors')
 const swaggerUi = require('swagger-ui-express');
 require('dotenv').config()
 const {DB_CONFIG} = require("./utils/config");
@@ -16,6 +17,8 @@ const PORT = process.env.PORT || 3000;
 DB_CONFIG();
 const app = express();
 
+// Adds headers: Access-Control-Allow-Origin: *
+app.use(cors())
 app.use(express.json());
 app.use(loggerMiddlware);
 app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(openapiSpecification, {explorer:true}));

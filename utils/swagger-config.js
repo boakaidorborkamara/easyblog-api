@@ -14,6 +14,10 @@ const swaggerJsdoc = require('swagger-jsdoc');
             {
             url: 'http://localhost:3000',
             description: 'Development server',
+            },
+            {
+                url:"https://easyblog-ckixbebfr-boakaidorborkamaras-projects.vercel.app/",
+                description:"Production server"
             }
         ]
     },
